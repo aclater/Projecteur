@@ -24,10 +24,11 @@ include(Translation)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-find_package(Qt5 COMPONENTS Core Gui Quick Widgets REQUIRED)
+
+find_package(Qt5 5.7 COMPONENTS Core Gui Quick Widgets REQUIRED)
+find_package(libusb-1.0 REQUIRED)
 
 add_executable(projecteur
   src/main.cc
@@ -43,7 +44,7 @@ add_executable(projecteur
   resources.qrc             qml/qml.qrc)
 
 target_link_libraries(projecteur
-  PRIVATE Qt5::Core Qt5::Quick Qt5::Widgets
+  Qt5::Core Qt5::Quick Qt5::Widgets libusb1
 )
 
 target_compile_options(projecteur
@@ -139,4 +140,3 @@ add_dist_package_target(
   PREINST_SCRIPT "${OUTDIR}/pkg/scripts/preinst"
   POSTINST_SCRIPT "${OUTDIR}/pkg/scripts/postinst"
 )
-
